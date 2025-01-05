@@ -1,16 +1,20 @@
 import React from "react";
-import { TaskProvider } from "./context/TaskContext";
+import { ErrorBoundary } from "react-error-boundary";
+import { TaskForm } from "./components/TaskForm";
 import { TaskList } from "./components/TaskList";
-// import { TaskForm } from "./components/TaskForm";
+import { TaskProvider } from "./context/TaskContext";
 
 const App: React.FC = () => {
   return (
     <TaskProvider>
       <div>
         <h1>Task Management App</h1>
-        {/*for add task*/}
-        {/* <TaskForm /> */}
-        <TaskList />
+        <ErrorBoundary fallback={<p>任務列表載入失敗</p>}>
+          <TaskForm />
+        </ErrorBoundary>
+        <ErrorBoundary fallback={<p>任務列表載入失敗</p>}>
+          <TaskList />
+        </ErrorBoundary>
       </div>
     </TaskProvider>
   );
